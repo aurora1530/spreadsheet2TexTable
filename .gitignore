@@ -4,3 +4,4 @@
 appsscript.json
 package.json
 *.draft.md
+.env
