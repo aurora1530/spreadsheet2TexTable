@@ -129,7 +129,7 @@ function validateColumnParameters(str = '', numOfCol) {
  * @returns {String} - The formatted date string
  */
 function formatDate(date, timezone = 'GMT', format = 'yyyy-MM-dd') {
-  if (data instanceof Date === false) return undefined;
+  if (!isDate(date)) return undefined;
   let formattedDate = '';
   try {
     formattedDate = Utilities.formatDate(date, timezone, format);
@@ -148,10 +148,19 @@ function formatEachCellOfMatrix(matrix, dateFormatOptions) {
   return matrix.map((row) =>
     row.map((cell) => {
       if (typeof cell === 'string') return escapeTexChar(cell.toString());
-      if (cell instanceof Date) {
+      if (isDate(cell)) {
         return formatDate(cell, dateFormatOptions?.timezone, dateFormatOptions?.format);
       }
       return cell;
     })
   );
+}
+
+/**
+ * Use this as, for some reason, instanceof Date does not work correctly in the library ahead.
+ * @param {any} value
+ * @returns {boolean}
+ */
+function isDate(value) {
+  return Object.prototype.toString.call(value) === '[object Date]';
 }
