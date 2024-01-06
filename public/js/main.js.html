@@ -1,8 +1,21 @@
 <script>
   document.getElementById('convertBtn').addEventListener('click', () => {
     const tableOptions = validateTableOptions()
-    google.script.run.withSuccessHandler(copyToClipboard).withFailureHandler(failureHandler).tableOptionsHandler(tableOptions)
+    toggleLoadingIcon()
+    google.script.run.withSuccessHandler(successHandler).withFailureHandler(failureHandler).tableOptionsHandler(tableOptions)
   })
+
+  function toggleLoadingIcon() {
+    const loadingIcon = document.getElementById('loading-icon')
+    const convertBtnText = document.getElementById('convertBtnText')
+    if (loadingIcon.style.display === 'none') {
+      loadingIcon.style.display = 'inline-block'
+      convertBtnText.style.display = 'none'
+    } else {
+      loadingIcon.style.display = 'none'
+      convertBtnText.style.display = 'inline-block'
+    }
+  }
 
   function validateTableOptions() {
     const tableLocation = document.getElementById('tableLocation').value
@@ -33,6 +46,11 @@
     return tableOptions
   }
 
+
+  function successHandler(val) {
+    toggleLoadingIcon()
+    copyToClipboard(val)
+  }
   function copyToClipboard(text) {
     navigator.clipboard.writeText(text)
       .then(() => {
@@ -44,6 +62,7 @@
   }
 
   function failureHandler(err) {
+    toggleLoadingIcon()
     alert(`failed to copy.\nServer error:${err}`)
   }
 
