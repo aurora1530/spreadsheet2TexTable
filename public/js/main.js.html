@@ -1,7 +1,7 @@
 <script>
   document.getElementById('convertBtn').addEventListener('click', () => {
     const tableOptions = validateTableOptions()
-    google.script.run.tableOptionsHandler(tableOptions)
+    google.script.run.withSuccessHandler(copyToClipboard).withFailureHandler(failureHandler).tableOptionsHandler(tableOptions)
   })
 
   function validateTableOptions() {
@@ -35,4 +35,19 @@
     }
     return tableOptions
   }
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        alert('copied!')
+      })
+      .catch((err) => {
+        alert(`failed to copy.\nClient error:${err}`)
+      })
+  }
+
+  function failureHandler(err) {
+    alert(`failed to copy.\nServer error:${err}`)
+  }
+
 </script>
