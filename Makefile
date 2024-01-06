@@ -12,5 +12,5 @@ push:
 newDeploy:
 	clasp deploy --deploymentId $(DEPLOYMENT_ID)
 
-update: build push newDeploy
-	echo "Done!"
+update:build push newDeploy
+	@echo "Done!"
