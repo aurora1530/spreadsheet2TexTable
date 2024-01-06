@@ -162,7 +162,7 @@ function formatEachCellOfMatrix(matrix, dateFormatOptions) {
 /**
  * Use this as, for some reason, instanceof Date does not work correctly in the library ahead.
  * @param {any} value
- * @returns {boolean}
+ * @returns {boolean} Whether the value is a Date object
  */
 function isDate(value) {
   return Object.prototype.toString.call(value) === '[object Date]';
