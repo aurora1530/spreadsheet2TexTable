@@ -23,35 +23,40 @@
       </div>
       <div>
         <label for="caption">caption</label>
-        <input type="text" name="caption" id="caption">
+        <input type="text" name="caption" id="caption" placeholder="table caption">
       </div>
     </div>
     <br>
     <div>
       <h2>dateFormatOptions</h2>
       <div><label for="timezone">timezone</label>
-        <input type="text" name="timezone" id="timezone">
+        <input type="text" name="timezone" id="timezone" placeholder="default:'GMT'">
       </div>
       <div><label for="format">format</label>
-        <input type="text" name="format" id="format">
+        <input type="text" name="format" id="format" placeholder="default:'yyyy-MM-dd'">
       </div>
     </div>
 
     <div>
       <h2>matrixOptions</h2>
-      <div><label for="isAddingFromEnd">isAddingFromEnd</label><select name="isAddingFromEnd" id="isAddingFromEnd">
+      <div><label for="isAddingFromEnd">isAddingFromEnd</label>
+        <select name="isAddingFromEnd" id="isAddingFromEnd">
           <option value="True" selected>True</option>
           <option value="False">False</option>
-        </select></div>
+        </select>
+      </div>
     </div>
 
     <div>
       <h2>TabularOptions</h2>
-      <div><label for="columnParameters">columnParameters</label><input type="text" name="columnParameters"
-          id="columnParameters"></div>
-      <div><label for="rowsRequiringHline">rowsRequiringHline</label><input type="text" name="rowsRequiringHline"
-          id="rowsRequiringHline"></div>
+      <div><label for="columnParameters">columnParameters</label>
+        <input type="text" name="columnParameters" id="columnParameters" placeholder="example:'c|c|c'">
+      </div>
+      <div><label for="rowsRequiringHline">rowsRequiringHline</label>
+        <input type="text" name="rowsRequiringHline" id="rowsRequiringHline" placeholder="example:'0,1,2'">
+      </div>
     </div>
+    <hr>
     <div>
       <h3>convert data to Tex Table,and copy to clipboard</h3><button id="convertBtn">btn</button>
     </div>
