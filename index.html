@@ -3,8 +3,7 @@
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base target="_top"> <!-- must be included -->
   <title>SelectTableOptions</title>
 </head>
 
@@ -50,11 +49,12 @@
       <h2>TabularOptions</h2>
       <div><label for="columnParameters">columnParameters</label><input type="text" name="columnParameters"
           id="columnParameters"></div>
+      <div><label for="rowsRequiringHline">rowsRequiringHline</label><input type="text" name="rowsRequiringHline"
+          id="rowsRequiringHline"></div>
     </div>
-    <div><label for="rowsRequiringHline">rowsRequiringHline</label><input type="text" name="rowsRequiringHline"
-        id="rowsRequiringHline"></div>
-
-    <button id="convertBtn">convert</button>
+    <div>
+      <h3>convert data to Tex Table,and copy to clipboard</h3><button id="convertBtn">btn</button>
+    </div>
   </form>
 </body>
 
