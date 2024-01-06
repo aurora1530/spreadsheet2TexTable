@@ -9,14 +9,17 @@
     const caption = document.getElementById('caption').value
     const timezone = document.getElementById('timezone').value
     const format = document.getElementById('format').value
-    let isAddingFromEnd = document.getElementById('isAddingFromEnd').value
+    let doesAddingFromEnd = document.getElementById('doesAddingFromEnd').value
     const columnParameters = document.getElementById('columnParameters').value
     let rowsRequiringHline = document.getElementById('rowsRequiringHline').value
+    let doesAddHlineToAll = document.getElementById('doesAddHlineToAll').value
 
-    isAddingFromEnd = isAddingFromEnd === 'False' ? false : true //if invalid value, set true
+    doesAddingFromEnd = doesAddingFromEnd === 'False' ? false : true //if invalid value, set true
 
     rowsRequiringHline = rowsRequiringHline.split(',')
       .map((num) => parseInt(num)).filter(num => !isNaN(num))
+
+    doesAddHlineToAll = doesAddHlineToAll === 'True' ? true : false //if invalid value, set false
 
     const tableOptions = {
       tableLocation: tableLocation,
@@ -26,11 +29,12 @@
         format: format
       },
       matrixOptions: {
-        isAddingFromEnd: isAddingFromEnd
+        doesAddingFromEnd: doesAddingFromEnd
       },
       tabularOptions: {
         columnParameters: columnParameters,
-        rowsRequiringHline: rowsRequiringHline
+        rowsRequiringHline: rowsRequiringHline,
+        doesAddHlineToAll: doesAddHlineToAll
       }
     }
     return tableOptions

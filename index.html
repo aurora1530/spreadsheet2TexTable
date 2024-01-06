@@ -39,8 +39,8 @@
 
     <div>
       <h2>matrixOptions</h2>
-      <div><label for="isAddingFromEnd">isAddingFromEnd</label>
-        <select name="isAddingFromEnd" id="isAddingFromEnd">
+      <div><label for="doesAddingFromEnd">doesAddingFromEnd</label>
+        <select name="doesAddingFromEnd" id="doesAddingFromEnd">
           <option value="True" selected>True</option>
           <option value="False">False</option>
         </select>
@@ -55,10 +55,16 @@
       <div><label for="rowsRequiringHline">rowsRequiringHline</label>
         <input type="text" name="rowsRequiringHline" id="rowsRequiringHline" placeholder="example:'0,1,2'">
       </div>
+      <div><label for="doesAddHlineToAll">doesAddHlineToAll</label>
+        <select name="doesAddHlineToAll" id="doesAddHlineToAll">
+          <option value="True">True</option>
+          <option value="False" selected>False</option>
+        </select>
+      </div>
     </div>
     <hr>
     <div>
-      <h3>convert data to Tex Table,and copy to clipboard</h3><button id="convertBtn">btn</button>
+      <h3>convert data to Tex Table,and copy to clipboard</h3><button id="convertBtn">convert</button>
     </div>
   </form>
 </body>
