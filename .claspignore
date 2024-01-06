@@ -1,3 +1,3 @@
 sample/*
 builder.js
-public/**/*
+public/js/*.js

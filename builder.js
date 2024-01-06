@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 function main() {
-  const html = fs.readFileSync(path.join(__dirname, './index.html'), 'utf-8');
+  const html = fs.readFileSync(path.join(__dirname, './public/index.html'), 'utf-8');
   const jsPathes = fs
     .readdirSync(path.join(__dirname, './public/js/'))
     .filter((filename) => path.extname(filename) === '.js')
@@ -23,7 +23,7 @@ function main() {
       (_, start, code, end) => `${start}\n<style>\n${cssCode}\n</style>\n${end}`
     );
 
-  fs.writeFileSync(path.join(__dirname, './index.html'), replacedHtml);
+  fs.writeFileSync(path.join(__dirname, './public/index.html'), replacedHtml);
 }
 
 main();
