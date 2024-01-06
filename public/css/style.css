@@ -1,0 +1,135 @@
+/* 基本的なリセットとスタイリング */
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 0.5rem;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Google Sans', Arial, sans-serif;
+}
+
+/* サイドバー全体のスタイル */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  background-color: #f1f3f4;
+  /* Googleのライトグレー */
+  color: #202124;
+  /* Googleのダークグレー */
+}
+
+/* フォーム要素のスタイリング */
+input,
+select,
+button {
+  padding: 10px;
+  margin: 10px 0;
+  width: calc(100% - 20px);
+  /* パディング分を引く */
+  border: 1px solid #dadce0;
+  /* Googleのボーダーカラー */
+  border-radius: 4px;
+}
+
+/* ボタンの特別なスタイリング */
+button {
+  background-color: #1a73e8;
+  /* Googleのブルー */
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1767ce;
+  /* 濃い青に */
+}
+
+/* ラベルのスタイリング */
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* セクション間のスペーシング */
+.section {
+  margin-bottom: 20px;
+}
+
+/* チェックボックスのスタイリング */
+input[type='checkbox'] {
+  /* 任意のサイズに設定 */
+  width: 25px;
+  /* 幅を大きく */
+  height: 25px;
+  /* 高さを大きく */
+  cursor: pointer;
+  /* カーソルをポインターに */
+}
+
+/* チェックボックスのフォーカス時のスタイル */
+input[type='checkbox']:focus {
+  outline: none;
+  /* デフォルトのアウトラインを除去 */
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.3);
+  /* Googleブルーのシャドウ */
+}
+
+/* チェックボックスのチェック時のカスタムスタイル */
+input[type='checkbox']:checked {
+  background-color: #1a73e8;
+  /* チェックされたらGoogleブルーに */
+  border-color: #1a73e8;
+}
+
+/* ローディングアイコンのスタイル */
+.loading-icon {
+  display: inline-block;
+  width: 20px;
+  /* アイコンのサイズ */
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  /* 上部の色を白に */
+  animation: spin 1s ease-in-out infinite;
+  /* アニメーションを適用 */
+  -webkit-animation: spin 1s ease-in-out infinite;
+  margin-right: 10px;
+  /* テキストとの間隔 */
+}
+
+/* 回転アニメーションのキーフレーム */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ボタンの追加スタイル */
+#convertBtn {
+  /* 他のスタイリング */
+  border: none;
+  background-color: #1a73e8;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#convertBtn:disabled {
+  background-color: #a0c3ff;
+  /* ディセーブル時の色変更 */
+}

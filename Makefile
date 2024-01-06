@@ -3,10 +3,13 @@ include .env
 version:
 	clasp versions
 
+build:
+	node build.js
+
 push:
 	clasp push
 
 newDeploy:
 	clasp deploy --deploymentId $(DEPLOYMENT_ID)
 
-update: push newDeploy
+update: build push newDeploy
