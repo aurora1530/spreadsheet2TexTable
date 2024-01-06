@@ -6,7 +6,7 @@ version:
 push:
 	clasp push
 
-newDeploy:
+deploy:
 	clasp deploy --deploymentId $(DEPLOYMENT_ID)
 
-update: push newDeploy
+update: push deploy
