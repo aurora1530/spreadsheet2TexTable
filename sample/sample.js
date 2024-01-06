@@ -18,10 +18,6 @@ function showSidebar() {
   SpreadsheetApp.getUi().showSidebar(html);
 }
 
-function showAlertDialog(text) {
-  SpreadsheetApp.getUi().alert(text);
-}
-
 function getSheetDate() {
   const sheet = SpreadsheetApp.getActiveSheet();
   const data = sheet.getDataRange().getValues();
