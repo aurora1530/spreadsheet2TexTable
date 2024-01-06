@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SelectTableOptions</title>
+</head>
+
+<body>
+  <form action="">
+    <div>
+      <h1>TableOptions</h1>
+      <div>
+        <label for="tableLocation">tableLocation</label>
+        <select name="tableLocation" id="tableLocation">
+          <option value="h">h</option>
+          <option value="t">t</option>
+          <option value="b">b</option>
+          <option value="p">p</option>
+          <option value="H">H</option>
+        </select>
+      </div>
+      <div>
+        <label for="caption">caption</label>
+        <input type="text" name="caption" id="caption">
+      </div>
+    </div>
+    <br>
+    <div>
+      <h2>dateFormatOptions</h2>
+      <div><label for="timezone">timezone</label>
+        <input type="text" name="timezone" id="timezone">
+      </div>
+      <div><label for="format">format</label>
+        <input type="text" name="format" id="format">
+      </div>
+    </div>
+
+    <div>
+      <h2>matrixOptions</h2>
+      <div><label for="isAddingFromEnd">isAddingFromEnd</label><select name="isAddingFromEnd" id="isAddingFromEnd">
+          <option value="True" selected>True</option>
+          <option value="False">False</option>
+        </select></div>
+    </div>
+
+    <div>
+      <h2>TabularOptions</h2>
+      <div><label for="columnParameters">columnParameters</label><input type="text" name="columnParameters"
+          id="columnParameters"></div>
+    </div>
+    <div><label for="rowsRequiringHline">rowsRequiringHline</label><input type="text" name="rowsRequiringHline"
+        id="rowsRequiringHline"></div>
+
+    <button id="convertBtn">convert</button>
+  </form>
+</body>
+
+<?!= include('public/js/main.js');?>
+
+</html>

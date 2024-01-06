@@ -1,0 +1,5 @@
+*.gscript
+*.gsheet
+.clasp.json
+appsscript.json
+package.json
