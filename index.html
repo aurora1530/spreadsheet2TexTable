@@ -5,61 +5,64 @@
 <head>
   <base target="_top"> <!-- must be included -->
   <title>SelectTableOptions</title>
+  <link rel="stylesheet" href="./public/css/style.css">
   <?!= include('public/css/style.css');?>
 </head>
 
 <body>
-  <form action="">
-    <div>
-      <h3>convert data to Tex Table,and copy to clipboard</h3>
-      <button id="convertBtn">
-        <span class="loading-icon" id="loading-icon" style="display: none;"></span>
-        <span id="convertBtnText">convert</span>
-      </button>
-    </div>
-    <hr>
-
-    <div>
-      <h1>TableOptions</h1>
+  <div class="container">
+    <form action="">
       <div>
-        <label for="tableLocation">tableLocation</label>
-        <select name="tableLocation" id="tableLocation">
-          <option value="h">h</option>
-          <option value="t">t</option>
-          <option value="b">b</option>
-          <option value="p">p</option>
-          <option value="H">H</option>
-        </select>
+        <h3>convert data to Tex Table,and copy to clipboard</h3>
+        <button id="convertBtn">
+          <span class="loading-icon" id="loading-icon" style="display: none;"></span>
+          <span id="convertBtnText">convert</span>
+        </button>
       </div>
+      <hr>
+
       <div>
-        <label for="caption">caption</label>
-        <input type="text" name="caption" id="caption" placeholder="table caption">
+        <h1>TableOptions</h1>
+        <div>
+          <label for="tableLocation">tableLocation</label>
+          <select name="tableLocation" id="tableLocation">
+            <option value="h">h</option>
+            <option value="t">t</option>
+            <option value="b">b</option>
+            <option value="p">p</option>
+            <option value="H">H</option>
+          </select>
+        </div>
+        <div>
+          <label for="caption">caption</label>
+          <input type="text" name="caption" id="caption" placeholder="table caption">
+        </div>
       </div>
-    </div>
 
-    <div>
-      <strong>TabularOptions</strong>
-      <div><label for="columnParameters">columnParameters</label>
-        <input type="text" name="columnParameters" id="columnParameters" placeholder="example:'c|c|c'">
+      <div>
+        <strong>TabularOptions</strong>
+        <div><label for="columnParameters">columnParameters</label>
+          <input type="text" name="columnParameters" id="columnParameters" placeholder="example:'c|c|c'">
+        </div>
+        <div><label for="rowsRequiringHline">rowsRequiringHline</label>
+          <input type="text" name="rowsRequiringHline" id="rowsRequiringHline" placeholder="example:'0,1,2'">
+        </div>
+        <div><label for="doesAddHlineToAll">doesAddHlineToAll</label>
+          <input type="checkbox" name="doesAddHlineToAll" id="doesAddHlineToAll">
+        </div>
       </div>
-      <div><label for="rowsRequiringHline">rowsRequiringHline</label>
-        <input type="text" name="rowsRequiringHline" id="rowsRequiringHline" placeholder="example:'0,1,2'">
-      </div>
-      <div><label for="doesAddHlineToAll">doesAddHlineToAll</label>
-        <input type="checkbox" name="doesAddHlineToAll" id="doesAddHlineToAll">
-      </div>
-    </div>
 
-    <div>
-      <strong>dateFormatOptions</strong>
-      <div><label for="timezone">timezone</label>
-        <input type="text" name="timezone" id="timezone" placeholder="default:'GMT'">
+      <div>
+        <strong>dateFormatOptions</strong>
+        <div><label for="timezone">timezone</label>
+          <input type="text" name="timezone" id="timezone" placeholder="default:'GMT'">
+        </div>
+        <div><label for="format">format</label>
+          <input type="text" name="format" id="format" placeholder="default:'yyyy-MM-dd'">
+        </div>
       </div>
-      <div><label for="format">format</label>
-        <input type="text" name="format" id="format" placeholder="default:'yyyy-MM-dd'">
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </body>
 
 <?!= include('public/js/main.js');?>
