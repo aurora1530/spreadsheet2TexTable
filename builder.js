@@ -1,5 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+
+/**
+ * Main function that reads HTML, JavaScript, and CSS files, replaces import placeholders with actual code,
+ * and writes the modified HTML back to the file.
+ */
 function main() {
   const html = fs.readFileSync(path.join(__dirname, './public/index.html'), 'utf-8');
   const jsPathes = fs
