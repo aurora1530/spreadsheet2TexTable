@@ -25,24 +25,23 @@ html {
   font-family: 'Google Sans', Arial, sans-serif;
 }
 
-/* サイドバー全体のスタイル */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 20px;
-  background-color: #f1f3f4;
-  /* Googleのライトグレー */
-  color: #202124;
-  /* Googleのダークグレー */
+h1 {
+  margin: 0;
 }
 
+h2 {
+  margin: 0;
+}
+
+hr {
+  margin: 1rem 0;
+}
 /* フォーム要素のスタイリング */
 input,
 select,
 button {
   padding: 10px;
-  margin: 10px 0;
+  margin: 1px 10px;
   width: calc(100% - 20px);
   /* パディング分を引く */
   border: 1px solid #dadce0;
@@ -65,8 +64,8 @@ button:hover {
 
 /* ラベルのスタイリング */
 label {
-  display: block;
-  margin-bottom: 5px;
+  display: inline-block;
+  margin-top: 10px;
 }
 
 /* セクション間のスペーシング */
@@ -77,12 +76,12 @@ label {
 /* チェックボックスのスタイリング */
 input[type='checkbox'] {
   /* 任意のサイズに設定 */
-  width: 25px;
   /* 幅を大きく */
-  height: 25px;
+  width: 1.5rem;
   /* 高さを大きく */
-  cursor: pointer;
+  height: 1.5rem;
   /* カーソルをポインターに */
+  cursor: pointer;
 }
 
 /* チェックボックスのフォーカス時のスタイル */
@@ -105,7 +104,6 @@ input[type='checkbox']:checked {
   display: inline-block;
   width: 20px;
   /* アイコンのサイズ */
-  height: 20px;
   border: 3px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   border-top-color: #fff;
@@ -176,22 +174,22 @@ input[type='checkbox']:checked {
           <input type="text" name="caption" id="caption" placeholder="table caption">
         </div>
       </div>
-
+      <hr>
       <div>
-        <strong>TabularOptions</strong>
+        <h2>TabularOptions</h2>
         <div><label for="columnParameters">columnParameters</label>
           <input type="text" name="columnParameters" id="columnParameters" placeholder="example:'c|c|c'">
         </div>
         <div><label for="rowsRequiringHline">rowsRequiringHline</label>
           <input type="text" name="rowsRequiringHline" id="rowsRequiringHline" placeholder="example:'0,1,2'">
         </div>
-        <div><label for="doesAddHlineToAll">doesAddHlineToAll</label>
-          <input type="checkbox" name="doesAddHlineToAll" id="doesAddHlineToAll">
+        <div><label for="doesAddHlineToAll">doesAddHlineToAll</label><input type="checkbox" name="doesAddHlineToAll"
+            id="doesAddHlineToAll">
         </div>
       </div>
-
+      <hr>
       <div>
-        <strong>dateFormatOptions</strong>
+        <h2>dateFormatOptions</h2>
         <div><label for="timezone">timezone</label>
           <input type="text" name="timezone" id="timezone" placeholder="default:'GMT'">
         </div>
