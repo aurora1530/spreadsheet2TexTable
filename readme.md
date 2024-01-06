@@ -19,20 +19,29 @@ A Google Apps Script that converts tables from spreadsheets into LaTeX tables. I
 7. With the sheet you want to convert into a Tex table open, select "Sheet2TexTable" → "Show Sidebar" from the menu.
 8. Make the appropriate settings changes and click "convert".
 
+If you want to set up your own ui,`array2TexTable(array,TableOptions)`.
+This will convert a two-dimensional array array into a Tex Table.
+
 ## Options
 
-- `tableOptions`
-  - `tableLocation`: Specifies the insertion location in the tex table.
-  - `caption`: Specifies the caption in the tex table.
-- `dateFormatOptions`
-  - `timezone`: Specifies the timezone used when formatting dates if the data includes 'date type' cells.
-  - `format`: Specifies the format used when formatting dates if the data includes 'date type' cells.
-- `matrixOptions`
-  - `doesAddingFromEnd`: When the columns in the sheet data are uneven, blank columns are inserted to match the length of the longest column. This specifies whether to insert from the beginning or the end.
-- `TabularOptions`
-  - `columnParameters`: Specifies the column parameters in tex's tabular.
-  - `rowsRequiringHline`: Specifies the rows to insert hline in tex's tabular. Specify the row indices as an array. For example: `[0, 2]` will insert hline at rows 0 and 2. In the sidebar, specify it as `0,2`.
-  - `doesAddHlineToAll`: Specifies whether to insert hline in all rows in tex's tabular. If set to `true`, `rowsRequiringHline` is ignored.
+```ts
+type tableOptions = {
+  tableLocation: 'h' | 't' | 'b' | 'p' | 'H'; //Specifies the insertion location in the tex table.
+  caption: string; //Specifies the caption in the tex table.
+  dateFormatOptions: {
+    timezone: string; // Specifies the timezone used when formatting dates if the data includes 'date type' cells.
+    format: string; //Specifies the format used when formatting dates if the data includes 'date type' cells.
+  };
+  matrixOptions: {
+    doesAddingFromEnd: boolean; // When the columns in the sheet data are uneven, blank columns are inserted to match the length of the longest column. This specifies whether to insert from the beginning or the end.
+  };
+  tabularOptions: {
+    columnParameters: string; // Specifies the column parameters in tex's tabular.
+    rowsRequiringHline: number[]; // Specifies the rows to insert hline in tex's tabular. Specify the row indices as an array. For example: `[0, 2]` will insert hline at rows 0 and 2. In the sidebar, specify it as `0,2`.
+    doesAddHlineToAll: boolean; // Specifies whether to insert hline in all rows in tex's tabular. If set to `true`, `rowsRequiringHline` is ignored.
+  };
+};
+```
 
 ## LICENSE
 
