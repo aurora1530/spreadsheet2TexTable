@@ -4,7 +4,7 @@ version:
 	clasp versions
 
 build:
-	node build.js
+	node builder.js
 
 push:
 	clasp push
