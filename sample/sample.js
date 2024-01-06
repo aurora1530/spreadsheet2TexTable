@@ -30,9 +30,11 @@ function getSheetDate() {
 
 /**
  * data input from sidebar is received by this function name.
+ * this function name is specified in index.html.
+ * Must return table string.
  */
 function tableOptionsHandler(tableOptions) {
   const data = getSheetDate();
   const table = Sheet2TexTable.array2TexTable(data, tableOptions);
-  showAlertDialog(table);
+  return table;
 }
