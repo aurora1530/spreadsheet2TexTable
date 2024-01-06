@@ -26,17 +26,17 @@ function isUniformColumnSize(matrix) {
  * If the argument is not a 2D array, it returns the argument without throwing an Error.
  * By default, elements are added to the end of each row. If false is passed, it adds elements to the beginning of the row, which is slower due to the use of array.unshift.
  * @param {any[][]} matrix - The 2D array to be uniformed
- * @param {boolean} isAddingFromEnd - Specifies whether to add elements to the end (true) or the beginning (false) of each row. Default is true.
+ * @param {boolean} doesAddingFromEnd - Specifies whether to add elements to the end (true) or the beginning (false) of each row. Default is true.
  * @returns {any[][]} - The uniformed 2D array
  */
-function uniformMatrix(matrix, isAddingFromEnd = true) {
+function uniformMatrix(matrix, doesAddingFromEnd = true) {
   if (isUniformColumnSize(matrix)) return matrix;
 
   const maxColSize = Math.max(...matrix.map((row) => row.length));
   return matrix.map((row, _) => {
     if (row.length === maxColSize) return row;
     const addElements = Array(maxColSize - row.length).fill(undefined);
-    if (isAddingFromEnd) row.push(...addElements);
+    if (doesAddingFromEnd) row.push(...addElements);
     else row.unshift(...addElements);
     return row;
   });

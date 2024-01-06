@@ -22,11 +22,12 @@
  * @property {string} [format] - The format to format dates. Default is 'yyyy-MM-dd'.
  *
  * @typedef {Object} MatrixOptions
- * @property {boolean} [isAddingFromEnd] - Specifies whether to add elements to the end (true) or the beginning (false) of each row in a non-uniform 2D array. Defaults to true.
+ * @property {boolean} [doesAddingFromEnd] - Specifies whether to add elements to the end (true) or the beginning (false) of each row in a non-uniform 2D array. Defaults to true.
  *
  * @typedef {Object} TabularOptions
  * @property {string} [columnParameters] - Specifies the column parameters. Inappropriate parameters are replaced with 'c'. If there are fewer column parameters than columns, 'c' is added. If there are more column parameters than columns, excess parameters are removed.
  * @property {Number[]} [rowsRequiringHline] - Specifies the indices of rows that require a horizontal line.
+ * @property {boolean} [doesAddHlineToAll] - Specifies whether to add a horizontal line to all rows. If true, rowsRequiringHline is ignored. Defaults to false.
  */
 
 function array2TexTable(array, options) {
@@ -35,7 +36,7 @@ function array2TexTable(array, options) {
     else array = [[array]];
   }
   array = formatEachCellOfMatrix(array, options?.dateFormatOptions);
-  array = uniformMatrix(array, options?.matrixOptions?.isAddingFromEnd);
+  array = uniformMatrix(array, options?.matrixOptions?.doesAddingFromEnd);
 
   const numOfColumns = array[0].length;
   const tabularOption = validateColumnParameters(
@@ -44,9 +45,11 @@ function array2TexTable(array, options) {
   );
   const tabularBody = array
     .map((row, i) => {
-      const hline = options?.tabularOptions?.rowsRequiringHline?.includes(i)
-        ? '\\hline'
-        : '';
+      const hline =
+        options?.tabularOptions?.doesAddHlineToAll ||
+        options?.tabularOptions?.rowsRequiringHline?.includes(i)
+          ? '\\hline'
+          : '';
       return row.join(' & ') + ' \\\\' + hline;
     })
     .join('\n');
