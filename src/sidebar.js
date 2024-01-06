@@ -7,7 +7,3 @@ function getHtmlForSidebar() {
   html.setTitle('Sidebar');
   return html;
 }
-
-function include(filename) {
-  return HtmlService.createTemplateFromFile(filename).evaluate().getContent();
-}
