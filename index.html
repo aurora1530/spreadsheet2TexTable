@@ -5,10 +5,16 @@
 <head>
   <base target="_top"> <!-- must be included -->
   <title>SelectTableOptions</title>
+  <?!= include('public/css/style.css');?>
 </head>
 
 <body>
   <form action="">
+    <div>
+      <h3>convert data to Tex Table,and copy to clipboard</h3><button id="convertBtn">convert</button>
+    </div>
+    <hr>
+
     <div>
       <h1>TableOptions</h1>
       <div>
@@ -49,10 +55,6 @@
       <div><label for="doesAddHlineToAll">doesAddHlineToAll</label>
         <input type="checkbox" name="doesAddHlineToAll" id="doesAddHlineToAll">
       </div>
-    </div>
-    <hr>
-    <div>
-      <h3>convert data to Tex Table,and copy to clipboard</h3><button id="convertBtn">convert</button>
     </div>
   </form>
 </body>
