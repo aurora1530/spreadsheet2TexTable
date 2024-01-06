@@ -3,3 +3,4 @@
 .clasp.json
 appsscript.json
 package.json
+*.draft.md
