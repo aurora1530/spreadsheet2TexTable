@@ -15,8 +15,9 @@ A Google Apps Script that converts tables from spreadsheets into LaTeX tables. I
 4. In the _Version_ dropdown, select the latest version, and then click _Add_.
 
 5. Paste the code from `sample/sample.js` into the script editor.
-6. With the sheet you want to convert into a Tex table open, select "Sheet2TexTable" → "Show Sidebar" from the menu.
-7. Make the appropriate settings changes and click "convert".
+6. Run onOpen once from the editor to approve permissions.
+7. With the sheet you want to convert into a Tex table open, select "Sheet2TexTable" → "Show Sidebar" from the menu.
+8. Make the appropriate settings changes and click "convert".
 
 ## Options
 
