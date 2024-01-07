@@ -252,14 +252,6 @@ function toggleConvertBtn() {
   else btn.disabled = true;
 }
 
-/**
- * @returns {Boolean}
- */
-function canConvert() {
-  if (!isValidA1Notation(document.getElementById('dataRange').value)) return false;
-  return true;
-}
-
 function successHandler(val) {
   toggleLoadingIcon();
   copyToClipboard(val);
