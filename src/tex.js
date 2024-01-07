@@ -96,8 +96,10 @@ function escapeTexChar(str) {
     ["'", '\\textquotesingle'],
     ['`', '\\textasciigrave'],
   ];
-  escapeRules.forEach(([char, escapedChar]) => (str = str.replaceAll(char, escapedChar)));
-  return str;
+  return escapeRules.reduce(
+    (acc, [char, escapedChar]) => acc.replaceAll(char, escapedChar),
+    str
+  );
 }
 
 /**
