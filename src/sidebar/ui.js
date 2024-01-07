@@ -2,7 +2,7 @@
  * Returns the template HTML content for the sidebar.
  * @returns {GoogleAppsScript.HTML.HtmlOutput} The HTML content for the sidebar.
  */
-function getHtmlForSidebar() {
+function getSidebarHTML() {
   const html = HtmlService.createTemplateFromFile('public/sidebar.html')
     .evaluate()
     .setTitle('TableOptions Settings');
@@ -18,7 +18,7 @@ function createMenu() {
 }
 
 function showSidebar() {
-  const html = getHtmlForSidebar();
+  const html = getSidebarHTML();
   SpreadsheetApp.getUi().showSidebar(html);
 }
 
