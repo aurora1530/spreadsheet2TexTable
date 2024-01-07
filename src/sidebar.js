@@ -30,15 +30,20 @@ function getSheetData(dataRange) {
   return range.getValues();
 }
 
+/**
+ *
+ * @param {GoogleAppsScript.Spreadsheet.Range} dataRange
+ * @returns {CellFormat[][]}
+ */
 function getCellFormats(dataRange) {
   const cellFormats = [];
   const sheet = SpreadsheetApp.getActiveSheet();
   const range = dataRange ? sheet.getRange(dataRange) : sheet.getDataRange();
-  const richTextValues = range.getRichTextValues();
-  for (let i = 0; i < richTextValues.length; i++) {
+  const textStyles = range.getTextStyles();
+  for (let i = 0; i < textStyles.length; i++) {
     cellFormats[i] = [];
-    for (let j = 0; j < richTextValues[i].length; j++) {
-      const textStyle = richTextValues[i][j].getTextStyle();
+    for (let j = 0; j < textStyles[i].length; j++) {
+      const textStyle = textStyles[i][j];
       const isBold = textStyle.isBold();
       const isItalic = textStyle.isItalic();
       cellFormats[i][j] = { isBold, isItalic };
