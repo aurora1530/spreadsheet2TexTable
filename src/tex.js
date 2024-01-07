@@ -27,7 +27,7 @@
  * @typedef {Object} TabularOptions
  * @property {string} [columnParameters] - Specifies the column parameters. Inappropriate parameters are replaced with 'c'. If there are fewer column parameters than columns, 'c' is added. If there are more column parameters than columns, excess parameters are removed.
  * @property {boolean} [doesAddVerticalRuleToAll] - Specifies whether to add a vertical rule to all columns. If true, '|' of columnParameters is ignored. Defaults to false.
- * @property {Number[]} [rowsRequiringHline] - Specifies the indices of rows that require a horizontal line.
+ * @property {Number[]} [rowsRequiringHline] - Specifies the indices of rows that require a horizontal line.if -1 is included,top hline is added. Defaults to [].
  * @property {boolean} [doesAddHlineToAll] - Specifies whether to add a horizontal line to all rows. If true, rowsRequiringHline is ignored. Defaults to false.
  */
 
@@ -38,22 +38,36 @@ function array2TexTable(array, options) {
 
   const numOfColumns = array[0].length;
   const tabularOption = validateColumnParameters(options?.tabularOptions, numOfColumns);
-  const tabularBody = array
-    .map((row, i) => {
-      const hline =
-        options?.tabularOptions?.doesAddHlineToAll ||
-        options?.tabularOptions?.rowsRequiringHline?.includes(i)
-          ? '\\hline'
-          : '';
-      return row.join(' & ') + ' \\\\' + hline;
-    })
-    .join('\n');
+  const columnParameters = createTabularBody(array, options?.tabularOptions);
 
-  const tabular = `\\begin{tabular}{${tabularOption}}\n${tabularBody}\n\\end{tabular}`;
+  const tabular = `\\begin{tabular}{${tabularOption}}\n${columnParameters}\n\\end{tabular}`;
   const tableLocation = options?.tableLocation ?? 'h';
   const title = options?.caption ? `\\caption{${options.caption}}\n` : '';
   const table = `\\begin{table}[${tableLocation}]\n${title}${tabular}\n\\end{table}`;
   return table;
+}
+
+/**
+ *
+ * @param {any[][]} array
+ * @param {TabularOptions} param1
+ * @returns {string}
+ */
+function createTabularBody(array, tabularOptions) {
+  const doesAddHlineToAll = tabularOptions?.doesAddHlineToAll ?? false;
+  const rowsRequiringHline = tabularOptions?.rowsRequiringHline ?? [];
+  const topHline =
+    doesAddHlineToAll || rowsRequiringHline.includes(-1) ? '\\hline\n' : '';
+  return (
+    topHline +
+    array
+      .map((row, i) => {
+        const hline =
+          doesAddHlineToAll || rowsRequiringHline.includes(i) ? '\\hline' : '';
+        return row.join(' & ') + ' \\\\' + hline;
+      })
+      .join('\n')
+  );
 }
 
 /**
