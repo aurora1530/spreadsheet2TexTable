@@ -69,30 +69,22 @@ function getTableWithTableOptions(dataRange, tableOptions) {
   return array2TexTable(data, tableOptions);
 }
 
-function quickConvert() {
-  const tableOptions = defaultTableOptions;
-  const table = getTableWithTableOptions('', tableOptions);
-  // const html = createHtmlOutputForModal(table);
-  const html = createHtmlTemplateForModal(table);
-  showModal(html, 'Quick convert');
-}
-
 /**
- * @param {String} string
- * @returns {GoogleAppsScript.HTML.HtmlOutput}
+ *
+ * @param {String} table
+ * @returns {String}
  */
-function createHtmlOutputForModal(string) {
-  const htmlStr = string.replace(/\n/g, '<br>');
-  const html = HtmlService.createHtmlOutput(htmlStr).setWidth(700).setHeight(500);
-  return html;
-}
-
 function createHtmlTextForModal(table) {
   const htmlStr = table.replace(/\n/g, '<br>');
   return `<div id="table">${htmlStr}</div>`;
 }
 
-function createHtmlTemplateForModal(table) {
+/**
+ *
+ * @param {String} table
+ * @returns {GoogleAppsScript.HTML.HtmlOutput}
+ */
+function createHtmlOutputForModal(table) {
   const html = HtmlService.createTemplateFromFile('public/modal.html');
   html.table = table;
   return html.evaluate().setWidth(700).setHeight(500);
@@ -105,4 +97,11 @@ function createHtmlTemplateForModal(table) {
  */
 function showModal(htmlOutput, title) {
   SpreadsheetApp.getUi().showModalDialog(htmlOutput, title);
+}
+
+function quickConvert() {
+  const tableOptions = defaultTableOptions;
+  const table = getTableWithTableOptions('', tableOptions);
+  const html = createHtmlOutputForModal(table);
+  showModal(html, 'Quick convert');
 }
