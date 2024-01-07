@@ -15,9 +15,9 @@
  * @property {string} [caption] - The caption of the table.
  * @property {TabularOptions} [tabularOptions] - Options specific to the tabular environment.
  * @property {MatrixOptions} [matrixOptions] - Options specific to matrix manipulation.
- * @property {dateFormatOptions} [dateFormatOptions] - Options for formatting dates.
+ * @property {DateFormatOptions} [dateFormatOptions] - Options for formatting dates.
  *
- * @typedef {Object} dateFormatOptions
+ * @typedef {Object} DateFormatOptions
  * @property {string} [timezone] - The timezone to format dates. Default is 'GMT'.
  * @property {string} [format] - The format to format dates. Default is 'yyyy-MM-dd'.
  *
@@ -145,7 +145,7 @@ function formatDate(date, timezone = 'GMT', format = 'yyyy-MM-dd') {
 /**
  * Applies escape and date format processing to each cell of a 2D array.
  * @param {any[][]} matrix - The matrix to process
- * @param {dateFormatOptions} dateFormatOptions - Options for date formatting
+ * @param {DateFormatOptions} dateFormatOptions - Options for date formatting
  */
 function formatEachCellOfMatrix(matrix, dateFormatOptions) {
   return matrix.map((row) =>
