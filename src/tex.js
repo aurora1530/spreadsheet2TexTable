@@ -26,6 +26,7 @@
  *
  * @typedef {Object} TabularOptions
  * @property {string} [columnParameters] - Specifies the column parameters. Inappropriate parameters are replaced with 'c'. If there are fewer column parameters than columns, 'c' is added. If there are more column parameters than columns, excess parameters are removed.
+ * @property {boolean} [doesAddVerticalRuleToAll] - Specifies whether to add a vertical rule to all columns. If true, '|' of columnParameters is ignored. Defaults to false.
  * @property {Number[]} [rowsRequiringHline] - Specifies the indices of rows that require a horizontal line.
  * @property {boolean} [doesAddHlineToAll] - Specifies whether to add a horizontal line to all rows. If true, rowsRequiringHline is ignored. Defaults to false.
  */
@@ -36,10 +37,7 @@ function array2TexTable(array, options) {
   array = uniformMatrix(array, options?.matrixOptions?.doesAddingFromEnd);
 
   const numOfColumns = array[0].length;
-  const tabularOption = validateColumnParameters(
-    options?.tabularOptions?.columnParameters,
-    numOfColumns
-  );
+  const tabularOption = validateColumnParameters(options?.tabularOptions, numOfColumns);
   const tabularBody = array
     .map((row, i) => {
       const hline =
@@ -92,12 +90,14 @@ function escapeTexChar(str) {
  * Inappropriate parameters are replaced with 'c'.
  * If there are fewer column parameters than columns, 'c' is added.
  * If there are more column parameters than columns, the excess parameters are removed.
- * @param {string} str - The column parameter string
+ * @param {TabularOptions} tabularOptions - The column parameter string
  * @param {number} numOfCol - The number of columns
  * @returns {string} The validated column parameter string
  */
-function validateColumnParameters(str = '', numOfCol) {
-  const parameters = str.replaceAll(' ', '').split('');
+function validateColumnParameters(tabularOptions, numOfCol) {
+  const columnParameters = tabularOptions?.columnParameters ?? '';
+  const doesAddVerticalRuleToAll = tabularOptions?.doesAddVerticalRuleToAll ?? false;
+  const parameters = columnParameters.replaceAll(' ', '').split('');
   const paramsWithoutBar = parameters.filter((v) => v !== '|');
   if (paramsWithoutBar.length < numOfCol) {
     parameters.push(...Array(numOfCol - paramsWithoutBar.length).fill('c'));
@@ -116,6 +116,10 @@ function validateColumnParameters(str = '', numOfCol) {
   parameters.forEach((param, i) => {
     if (param !== '|' && !validParameters.includes(param)) parameters[i] = 'c';
   });
+  if (doesAddVerticalRuleToAll) {
+    return `|${parameters.filter((p) => p !== '|').join('|')}|`;
+  }
+
   return parameters.join('');
 }
 
@@ -134,6 +138,7 @@ function formatDate(date, timezone = 'GMT', format = 'yyyy-MM-dd') {
   try {
     formattedDate = Utilities.formatDate(date, timezone, format);
   } catch (e) {
+    // If timezone or format is invalid, defaults are used for formatting.
     formattedDate = Utilities.formatDate(date, 'GMT', 'yyyy-MM-dd');
   }
   return formattedDate;

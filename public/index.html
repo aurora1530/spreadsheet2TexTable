@@ -189,6 +189,9 @@ input[type='checkbox']:checked {
         <div><label for="columnParameters">columnParameters</label>
           <input type="text" name="columnParameters" id="columnParameters" placeholder="example:'c|c|c'">
         </div>
+        <div><label for="doesAddVerticalRuleToAll">doesAddVerticalRuleToAll</label>
+          <input type="checkbox" name="doesAddVerticalRuleToAll" id="doesAddVerticalRuleToAll">
+        </div>
         <div><label for="rowsRequiringHline">rowsRequiringHline</label>
           <input type="text" name="rowsRequiringHline" id="rowsRequiringHline" placeholder="example:'0,1,2'">
         </div>
@@ -297,6 +300,9 @@ function validateTableOptions() {
   const timezone = document.getElementById('timezone').value;
   const format = document.getElementById('format').value;
   const columnParameters = document.getElementById('columnParameters').value;
+  const doesAddVerticalRuleToAll = document.getElementById(
+    'doesAddVerticalRuleToAll'
+  ).checked;
   let rowsRequiringHline = document.getElementById('rowsRequiringHline').value;
   const doesAddHlineToAll = document.getElementById('doesAddHlineToAll').checked;
 
@@ -314,6 +320,7 @@ function validateTableOptions() {
     },
     tabularOptions: {
       columnParameters: columnParameters,
+      doesAddVerticalRuleToAll: doesAddVerticalRuleToAll,
       rowsRequiringHline: rowsRequiringHline,
       doesAddHlineToAll: doesAddHlineToAll,
     },

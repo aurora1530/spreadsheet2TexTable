@@ -23,6 +23,9 @@ function validateTableOptions() {
   const timezone = document.getElementById('timezone').value;
   const format = document.getElementById('format').value;
   const columnParameters = document.getElementById('columnParameters').value;
+  const doesAddVerticalRuleToAll = document.getElementById(
+    'doesAddVerticalRuleToAll'
+  ).checked;
   let rowsRequiringHline = document.getElementById('rowsRequiringHline').value;
   const doesAddHlineToAll = document.getElementById('doesAddHlineToAll').checked;
 
@@ -40,6 +43,7 @@ function validateTableOptions() {
     },
     tabularOptions: {
       columnParameters: columnParameters,
+      doesAddVerticalRuleToAll: doesAddVerticalRuleToAll,
       rowsRequiringHline: rowsRequiringHline,
       doesAddHlineToAll: doesAddHlineToAll,
     },
