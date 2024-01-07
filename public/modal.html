@@ -33,6 +33,11 @@
 </body>
 <script>
   document.getElementById('btn').addEventListener('click', copy)
+  const restoreText = () => {
+    setTimeout(() => {
+      document.getElementById('btn').innerText = 'copy'
+    }, 1000)
+  }
 
   function copy() {
     const table = document.getElementById('table').innerText;
@@ -40,15 +45,11 @@
       .then(
         () => {
           this.innerText = 'copied!'
-          setTimeout(() => {
-            this.innerText = 'copy'
-          }, 2000)
+          restoreText()
         },
         () => {
           this.innerText = 'failed...'
-          setTimeout(() => {
-            this.innerText = 'copy'
-          }, 2000)
+          restoreText()
         },
       );
   }
