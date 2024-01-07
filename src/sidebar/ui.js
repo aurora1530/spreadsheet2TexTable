@@ -72,7 +72,8 @@ function getTableWithTableOptions(dataRange, tableOptions) {
 function quickConvert() {
   const tableOptions = defaultTableOptions;
   const table = getTableWithTableOptions('', tableOptions);
-  const html = createHtmlOutputForModal(table);
+  // const html = createHtmlOutputForModal(table);
+  const html = createHtmlTemplateForModal(table);
   showModal(html, 'Quick convert');
 }
 
@@ -84,6 +85,17 @@ function createHtmlOutputForModal(string) {
   const htmlStr = string.replace(/\n/g, '<br>');
   const html = HtmlService.createHtmlOutput(htmlStr).setWidth(700).setHeight(500);
   return html;
+}
+
+function createHtmlTextForModal(table) {
+  const htmlStr = table.replace(/\n/g, '<br>');
+  return `<div id="table">${htmlStr}</div>`;
+}
+
+function createHtmlTemplateForModal(table) {
+  const html = HtmlService.createTemplateFromFile('public/modal.html');
+  html.table = table;
+  return html.evaluate().setWidth(700).setHeight(500);
 }
 
 /**
