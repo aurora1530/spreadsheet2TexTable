@@ -65,7 +65,7 @@ function createTabularBody(array, tabularOptions) {
       .map((row, i) => {
         const hline =
           doesAddHlineToAll || rowsRequiringHline.includes(i) ? '\\hline' : '';
-        return row.join(' & ') + ' \\\\' + hline;
+        return `${row.join(' & ')} \\\\ ${hline}`;
       })
       .join('\n')
   );
