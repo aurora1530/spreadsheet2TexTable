@@ -34,7 +34,7 @@ const createFileListMessage = (filePaths) => {
  * and writes the modified HTML back to the file.
  */
 function main() {
-  const html = fs.readFileSync(path.join(__dirname, './public/index.html'), 'utf-8');
+  const html = fs.readFileSync(path.join(__dirname, './public/sidebar.html'), 'utf-8');
   const publicPath = path.join(__dirname, './public/');
   const jsPaths = getPathsMatchExt(path.join(publicPath, 'js/'), '.js');
   const cssPaths = getPathsMatchExt(path.join(publicPath, 'css/'), '.css');
@@ -43,7 +43,7 @@ function main() {
   let replacedHtml = replacePlaceholders(html, 'js', jsCode);
   replacedHtml = replacePlaceholders(replacedHtml, 'css', cssCode);
 
-  fs.writeFileSync(path.join(__dirname, './public/index.html'), replacedHtml);
+  fs.writeFileSync(path.join(__dirname, './public/sidebar.html'), replacedHtml);
   const message =
     `Successfully built HTML file.\n` +
     `js files:\n${createFileListMessage(jsPaths)}\n` +

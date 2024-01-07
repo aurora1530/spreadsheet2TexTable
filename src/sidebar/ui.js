@@ -3,7 +3,7 @@
  * @returns {GoogleAppsScript.HTML.HtmlOutput} The HTML content for the sidebar.
  */
 function getHtmlForSidebar() {
-  const html = HtmlService.createTemplateFromFile('public/index.html')
+  const html = HtmlService.createTemplateFromFile('public/sidebar.html')
     .evaluate()
     .setTitle('TableOptions Settings');
   return html;
