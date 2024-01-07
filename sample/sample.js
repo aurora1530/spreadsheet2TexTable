@@ -7,11 +7,10 @@ function onOpen(e) {
   Sheet2TexTable.createMenu();
 }
 
-function getSheetDate(dataRange) {
+function getSheetData(dataRange) {
   const sheet = SpreadsheetApp.getActiveSheet();
   const range = dataRange ? sheet.getRange(dataRange) : sheet.getDataRange();
-  const data = range.getValues();
-  return data;
+  return range.getValues();
 }
 
 /**
@@ -20,7 +19,7 @@ function getSheetDate(dataRange) {
  * Must return table string.
  */
 function tableOptionsHandler(dataRange, tableOptions) {
-  const data = getSheetDate(dataRange);
+  const data = getSheetData(dataRange);
   const table = Sheet2TexTable.array2TexTable(data, tableOptions);
   return table;
 }
