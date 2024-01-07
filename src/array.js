@@ -43,7 +43,7 @@ function isUniformColumnSize(matrix) {
  * @param {boolean} doesAddingFromEnd - Specifies whether to add elements to the end (true) or the beginning (false) of each row. Default is true.
  * @returns {any[][]} - The uniformed 2D array
  */
-function uniformMatrix(matrix, doesAddingFromEnd = true) {
+function toUniformMatrix(matrix, doesAddingFromEnd = true) {
   if (isUniformColumnSize(matrix)) return matrix;
 
   const maxColSize = Math.max(...matrix.map((row) => row.length));

@@ -18,7 +18,7 @@ function array2TexTable(array, options) {
     options?.dateFormatOptions,
     options?.tabularOptions?.cellFormats
   );
-  array = uniformMatrix(array, options?.matrixOptions?.doesAddingFromEnd);
+  array = toUniformMatrix(array, options?.matrixOptions?.doesAddingFromEnd);
   if (options?.tabularOptions?.doesAlignWidth) array = alignWidthOfMatrix(array);
   const numOfColumns = array[0].length;
   const tabularOption = validateColumnParameters(options?.tabularOptions, numOfColumns);
