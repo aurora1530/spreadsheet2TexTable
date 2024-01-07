@@ -4,23 +4,13 @@
  * add menu to spreadsheet
  */
 function onOpen(e) {
-  SpreadsheetApp.getUi()
-    .createMenu('Sheet2TexTable')
-    .addItem('Show sidebar', 'showSidebar')
-    .addToUi();
+  Sheet2TexTable.createMenu();
 }
 
-/**
- * show sidebar
- */
-function showSidebar() {
-  const html = Sheet2TexTable.getHtmlForSidebar();
-  SpreadsheetApp.getUi().showSidebar(html);
-}
-
-function getSheetDate() {
+function getSheetDate(dataRange) {
   const sheet = SpreadsheetApp.getActiveSheet();
-  const data = sheet.getDataRange().getValues();
+  const range = dataRange ? sheet.getRange(dataRange) : sheet.getDataRange();
+  const data = range.getValues();
   return data;
 }
 
@@ -29,8 +19,8 @@ function getSheetDate() {
  * this function name is specified in index.html.
  * Must return table string.
  */
-function tableOptionsHandler(tableOptions) {
-  const data = getSheetDate();
+function tableOptionsHandler(dataRange, tableOptions) {
+  const data = getSheetDate(dataRange);
   const table = Sheet2TexTable.array2TexTable(data, tableOptions);
   return table;
 }

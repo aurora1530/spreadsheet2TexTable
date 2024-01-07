@@ -1,10 +1,10 @@
 document.getElementById('convertBtn').addEventListener('click', () => {
-  const tableOptions = validateTableOptions();
+  const { dataRange, tableOptions } = validateTableOptions();
   toggleLoadingIcon();
   google.script.run
     .withSuccessHandler(successHandler)
     .withFailureHandler(failureHandler)
-    .tableOptionsHandler(tableOptions);
+    .tableOptionsHandler(dataRange, tableOptions);
 });
 
 function toggleLoadingIcon() {
@@ -20,6 +20,7 @@ function toggleLoadingIcon() {
 }
 
 function validateTableOptions() {
+  const dataRange = document.getElementById('dataRange').value;
   const tableLocation = document.getElementById('tableLocation').value;
   const caption = document.getElementById('caption').value;
   const timezone = document.getElementById('timezone').value;
@@ -47,7 +48,7 @@ function validateTableOptions() {
     },
   };
   console.log(tableOptions);
-  return tableOptions;
+  return { dataRange, tableOptions };
 }
 
 function successHandler(val) {
