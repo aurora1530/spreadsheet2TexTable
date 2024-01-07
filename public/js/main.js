@@ -7,6 +7,18 @@ document.getElementById('convertBtn').addEventListener('click', () => {
     .tableOptionsHandler(dataRange, tableOptions);
 });
 
+document.getElementById('dataRange').addEventListener('input', function () {
+  const messageElement = document.getElementById('dataRangeMessage');
+  if (!isValidA1Notation(this.value)) {
+    this.classList.add('invalid');
+    messageElement.hidden = false;
+  } else {
+    this.classList.remove('invalid');
+    messageElement.hidden = true;
+  }
+  toggleConvertBtn();
+});
+
 function toggleLoadingIcon() {
   const loadingIcon = document.getElementById('loading-icon');
   const convertBtnText = document.getElementById('convertBtnText');
@@ -19,36 +31,18 @@ function toggleLoadingIcon() {
   }
 }
 
-function validateTableOptions() {
-  const dataRange = document.getElementById('dataRange').value;
-  const tableLocation = document.getElementById('tableLocation').value;
-  const caption = document.getElementById('caption').value;
-  const timezone = document.getElementById('timezone').value;
-  const format = document.getElementById('format').value;
-  const columnParameters = document.getElementById('columnParameters').value;
-  let rowsRequiringHline = document.getElementById('rowsRequiringHline').value;
-  const doesAddHlineToAll = document.getElementById('doesAddHlineToAll').checked;
+function toggleConvertBtn() {
+  const btn = document.getElementById('convertBtn');
+  if (canConvert()) btn.disabled = false;
+  else btn.disabled = true;
+}
 
-  rowsRequiringHline = rowsRequiringHline
-    .split(',')
-    .map((num) => parseInt(num))
-    .filter((num) => !isNaN(num));
-
-  const tableOptions = {
-    tableLocation: tableLocation,
-    caption: caption,
-    dateFormatOptions: {
-      timezone: timezone,
-      format: format,
-    },
-    tabularOptions: {
-      columnParameters: columnParameters,
-      rowsRequiringHline: rowsRequiringHline,
-      doesAddHlineToAll: doesAddHlineToAll,
-    },
-  };
-  console.log(tableOptions);
-  return { dataRange, tableOptions };
+/**
+ * @returns {Boolean}
+ */
+function canConvert() {
+  if (!isValidA1Notation(document.getElementById('dataRange').value)) return false;
+  return true;
 }
 
 function successHandler(val) {

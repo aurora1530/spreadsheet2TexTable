@@ -25,6 +25,10 @@ html {
   font-family: 'Google Sans', Arial, sans-serif;
 }
 
+input.invalid {
+  border: 2px solid red;
+}
+
 h1 {
   margin: 0;
 }
@@ -159,7 +163,9 @@ input[type='checkbox']:checked {
       <hr>
       <div><label for="dataRange">dataRange(A1Notations)</label>
         <input type="text" name="dataRange" id="dataRange">
+        <span id="dataRangeMessage" hidden>Invalid A1 notation</span>
       </div>
+      <hr>
       <div>
         <h1>TableOptions</h1>
         <div>
@@ -216,6 +222,18 @@ document.getElementById('convertBtn').addEventListener('click', () => {
     .tableOptionsHandler(dataRange, tableOptions);
 });
 
+document.getElementById('dataRange').addEventListener('input', function () {
+  const messageElement = document.getElementById('dataRangeMessage');
+  if (!isValidA1Notation(this.value)) {
+    this.classList.add('invalid');
+    messageElement.hidden = false;
+  } else {
+    this.classList.remove('invalid');
+    messageElement.hidden = true;
+  }
+  toggleConvertBtn();
+});
+
 function toggleLoadingIcon() {
   const loadingIcon = document.getElementById('loading-icon');
   const convertBtnText = document.getElementById('convertBtnText');
@@ -226,6 +244,58 @@ function toggleLoadingIcon() {
     loadingIcon.style.display = 'none';
     convertBtnText.style.display = 'inline-block';
   }
+}
+
+function toggleConvertBtn() {
+  const btn = document.getElementById('convertBtn');
+  if (canConvert()) btn.disabled = false;
+  else btn.disabled = true;
+}
+
+/**
+ * @returns {Boolean}
+ */
+function canConvert() {
+  if (!isValidA1Notation(document.getElementById('dataRange').value)) return false;
+  return true;
+}
+
+function successHandler(val) {
+  toggleLoadingIcon();
+  copyToClipboard(val);
+}
+function copyToClipboard(text) {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      alert('copied!');
+    })
+    .catch((err) => {
+      alert(`failed to copy.\nClient error:${err}`);
+    });
+}
+
+function failureHandler(err) {
+  toggleLoadingIcon();
+  alert(`failed to copy.\nServer error:${err}`);
+}
+
+/**
+ * @returns {Boolean}
+ */
+function canConvert() {
+  if (!isValidA1Notation(document.getElementById('dataRange').value)) return false;
+  return true;
+}
+/**
+ * if string is empty,return true.
+ * @param {String} string
+ * @returns {Boolean}
+ */
+function isValidA1Notation(string) {
+  if (string === '') return true;
+  const regex = /^[A-Z]+[1-9]\d*(:[A-Z]+[1-9]\d*)?$/;
+  return regex.test(string);
 }
 
 function validateTableOptions() {
@@ -258,26 +328,6 @@ function validateTableOptions() {
   };
   console.log(tableOptions);
   return { dataRange, tableOptions };
-}
-
-function successHandler(val) {
-  toggleLoadingIcon();
-  copyToClipboard(val);
-}
-function copyToClipboard(text) {
-  navigator.clipboard
-    .writeText(text)
-    .then(() => {
-      alert('copied!');
-    })
-    .catch((err) => {
-      alert(`failed to copy.\nClient error:${err}`);
-    });
-}
-
-function failureHandler(err) {
-  toggleLoadingIcon();
-  alert(`failed to copy.\nServer error:${err}`);
 }
 
 </script>
