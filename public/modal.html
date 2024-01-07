@@ -3,6 +3,7 @@
 
 <head>
   <base target="_top"> <!-- must be included -->
+  <title>Quick Convert</title>
   <style>
     button {
       padding: 10px 15px;
@@ -26,14 +27,30 @@
 </head>
 
 <body>
-  <button onclick="copy()">copy</button>
+  <button id="btn">copy</button>
   <hr>
   <?!= createHtmlTextForModal(table); ?>
 </body>
 <script>
+  document.getElementById('btn').addEventListener('click', copy)
+
   function copy() {
     const table = document.getElementById('table').innerText;
-    navigator.clipboard.writeText(table);
+    navigator.clipboard.writeText(table)
+      .then(
+        () => {
+          this.innerText = 'copied!'
+          setTimeout(() => {
+            this.innerText = 'copy'
+          }, 2000)
+        },
+        () => {
+          this.innerText = 'failed...'
+          setTimeout(() => {
+            this.innerText = 'copy'
+          }, 2000)
+        },
+      );
   }
 </script>
 
