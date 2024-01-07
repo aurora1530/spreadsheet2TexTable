@@ -7,6 +7,10 @@ function onOpen(e) {
   Sheet2TexTable.createMenu();
 }
 
+/**
+ * @param {String} dataRange - A1 notation of data range.
+ * @returns {any[][]}
+ */
 function getSheetData(dataRange) {
   const sheet = SpreadsheetApp.getActiveSheet();
   const range = dataRange ? sheet.getRange(dataRange) : sheet.getDataRange();
