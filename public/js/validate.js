@@ -12,7 +12,7 @@ function canConvert() {
  */
 function isValidA1Notation(string) {
   if (string === '') return true;
-  const regex = /^[A-Z]+[1-9]\d*(:[A-Z]+[1-9]\d*)?$/;
+  const regex = /^[A-Za-z]+[1-9]\d*(:[A-Za-z]+[1-9]\d*)?$/;
   return regex.test(string);
 }
 
