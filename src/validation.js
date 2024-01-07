@@ -44,3 +44,43 @@ const defaultTableOptions = {
     format: 'yyyy-MM-dd',
   },
 };
+
+// /**
+//  *
+//  * @param {TabularOptions} tabularOptions
+//  */
+// function validateTabularOptions(tabularOptions){
+//   if(tabularOptions.tableLocation)
+// }
+
+// /**
+//  *
+//  * @param {MatrixOptions} matrixOptions
+//  * @returns {MatrixOptions}
+//  */
+// function validateMatrixOptions(matrixOptions) {
+//   if (typeof matrixOptions.doesAddingFromEnd !== 'boolean') {
+//     matrixOptions.doesAddingFromEnd = defaultTableOptions.matrixOptions.doesAddingFromEnd;
+//   }
+//   return matrixOptions;
+// }
+
+// /**
+//  * @param {DateFormatOptions} dateFormatOptions
+//  * @returns {DateFormatOptions}
+//  */
+// function validateDateFormatOptions(dateFormatOptions) {
+//   if (typeof dateFormatOptions.timezone !== 'string') {
+//     dateFormatOptions.timezone = defaultTableOptions.dateFormatOptions.timezone;
+//   }
+//   if (typeof dateFormatOptions.format !== 'string') {
+//     dateFormatOptions.format = defaultTableOptions.dateFormatOptions.format;
+//   }
+//   return dateFormatOptions;
+// }
+
+// function validateTableOptions(tableOptions) {
+//   tableOptions = Object.assign(defaultTableOptions, tableOptions);
+
+//   return tableOptions;
+// }
