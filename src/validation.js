@@ -49,8 +49,9 @@ const defaultTableOptions = {
  *
  * @param {TabularOptions} tabularOptions
  */
-function validateTabularOptions(tabularOptions){
-  if(tabularOptions.tableLocation)
+function validateTabularOptions(tabularOptions) {
+  if (tabularOptions.tableLocation) {
+  }
 }
 
 /**
@@ -86,10 +87,9 @@ function validateDateFormatOptions(dateFormatOptions) {
  */
 function validateTableOptions(tableOptions) {
   tableOptions = Object.assign(defaultTableOptions, tableOptions);
-  if(!['h','t','b','p','H'].includes(tableOptions.tableLocation)){
+  if (!['h', 't', 'b', 'p', 'H'].includes(tableOptions.tableLocation)) {
     tableOptions.tableLocation = defaultTableOptions.tableLocation;
   }
-
 
   return tableOptions;
 }
