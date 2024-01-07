@@ -1,16 +1,21 @@
 include .env
+filename := $(shell date "+%Y_%m_%d_%H_%M_%S").log
+
+log:
+	@touch logs/$(filename)
 
 version:
-	clasp versions
+	@clasp versions
 
-build:
-	node builder.js
+build:log
+	@node builder.js | tee -a logs/$(filename)
 
 push:build
-	clasp push
+	@clasp push | tee -a logs/$(filename)
 
 newDeploy:
-	clasp deploy --deploymentId $(DEPLOYMENT_ID)
+	@clasp deploy --deploymentId $(DEPLOYMENT_ID) | tee -a logs/$(filename)
 
 update:push newDeploy
 	@echo "Done!"
+
