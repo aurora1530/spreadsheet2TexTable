@@ -29,6 +29,15 @@ function main() {
     );
 
   fs.writeFileSync(path.join(__dirname, './public/index.html'), replacedHtml);
+  const message =
+    `Successfully built HTML file.\n` +
+    `js files:\n${jsPathes
+      .map((filePath) => '└─ ' + path.basename(filePath))
+      .join('\n')}\n` +
+    `css files:\n${cssPathes
+      .map((filePath) => '└─ ' + path.basename(filePath))
+      .join('\n')}`;
+  console.log(message);
 }
 
 main();
