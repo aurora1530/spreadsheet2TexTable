@@ -6,11 +6,11 @@ version:
 build:
 	node builder.js
 
-push:
+push:build
 	clasp push
 
 newDeploy:
 	clasp deploy --deploymentId $(DEPLOYMENT_ID)
 
-update:build push newDeploy
+update:push newDeploy
 	@echo "Done!"
