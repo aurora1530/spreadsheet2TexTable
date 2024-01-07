@@ -55,3 +55,26 @@ function uniformMatrix(matrix, doesAddingFromEnd = true) {
     return row;
   });
 }
+
+/**
+ *
+ * @param {any[][]} matrix uniformed matrix
+ * @returns {any[][]}
+ */
+function transpose(matrix) {
+  return matrix[0].map((_, c) => matrix.map((r) => r[c]));
+}
+
+/**
+ *
+ * @param {string[][]} matrix - uniformed matrix
+ * @returns {string[][]}
+ */
+function alignWidthOfMatrix(matrix) {
+  const maxWidthOfEachColumn = transpose(matrix).map((col) =>
+    Math.max(...col.map((cell) => cell.length))
+  );
+  return matrix.map((row) =>
+    row.map((cell, colIndex) => cell.padStart(maxWidthOfEachColumn[colIndex], ' '))
+  );
+}

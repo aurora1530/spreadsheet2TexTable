@@ -28,6 +28,7 @@ function validateTableOptions() {
   ).checked;
   let rowsRequiringHline = document.getElementById('rowsRequiringHline').value;
   const doesAddHlineToAll = document.getElementById('doesAddHlineToAll').checked;
+  const doesAlignWidth = document.getElementById('doesAlignWidth').checked;
 
   rowsRequiringHline = rowsRequiringHline
     .split(',')
@@ -46,6 +47,7 @@ function validateTableOptions() {
       doesAddVerticalRuleToAll: doesAddVerticalRuleToAll,
       rowsRequiringHline: rowsRequiringHline,
       doesAddHlineToAll: doesAddHlineToAll,
+      doesAlignWidth: doesAlignWidth,
     },
   };
   console.log(tableOptions);

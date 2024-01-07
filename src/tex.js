@@ -29,13 +29,14 @@
  * @property {boolean} [doesAddVerticalRuleToAll] - Specifies whether to add a vertical rule to all columns. If true, '|' of columnParameters is ignored. Defaults to false.
  * @property {Number[]} [rowsRequiringHline] - Specifies the indices of rows that require a horizontal line.if -1 is included,top hline is added. Defaults to [].
  * @property {boolean} [doesAddHlineToAll] - Specifies whether to add a horizontal line to all rows. If true, rowsRequiringHline is ignored. Defaults to false.
+ * @property {boolean} [doesAlignWidth] - Specifies whether to align the width of the columns. Defaults to false.
  */
 
 function array2TexTable(array, options) {
   array = toMatrix(array);
   array = formatEachCellOfMatrix(array, options?.dateFormatOptions);
   array = uniformMatrix(array, options?.matrixOptions?.doesAddingFromEnd);
-
+  if (options?.tabularOptions?.doesAlignWidth) array = alignWidthOfMatrix(array);
   const numOfColumns = array[0].length;
   const tabularOption = validateColumnParameters(options?.tabularOptions, numOfColumns);
   const columnParameters = createTabularBody(array, options?.tabularOptions);
@@ -162,6 +163,7 @@ function formatDate(date, timezone = 'GMT', format = 'yyyy-MM-dd') {
  * Applies escape and date format processing to each cell of a 2D array.
  * @param {any[][]} matrix - The matrix to process
  * @param {DateFormatOptions} dateFormatOptions - Options for date formatting
+ * @param {(string|undefined)[][]}
  */
 function formatEachCellOfMatrix(matrix, dateFormatOptions) {
   return matrix.map((row) =>
@@ -170,7 +172,8 @@ function formatEachCellOfMatrix(matrix, dateFormatOptions) {
       if (isDate(cell)) {
         return formatDate(cell, dateFormatOptions?.timezone, dateFormatOptions?.format);
       }
-      return cell;
+      if (typeof cell === 'number') return cell.toString();
+      return String(cell);
     })
   );
 }

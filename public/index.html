@@ -198,6 +198,9 @@ input[type='checkbox']:checked {
         <div><label for="doesAddHlineToAll">doesAddHlineToAll</label><input type="checkbox" name="doesAddHlineToAll"
             id="doesAddHlineToAll">
         </div>
+        <div><label for="doesAlignWidth">doesAlignWidth</label>
+          <input type="checkbox" name="doesAlignWidth" id="doesAlignWidth">
+        </div>
       </div>
       <hr>
       <div>
@@ -305,6 +308,7 @@ function validateTableOptions() {
   ).checked;
   let rowsRequiringHline = document.getElementById('rowsRequiringHline').value;
   const doesAddHlineToAll = document.getElementById('doesAddHlineToAll').checked;
+  const doesAlignWidth = document.getElementById('doesAlignWidth').checked;
 
   rowsRequiringHline = rowsRequiringHline
     .split(',')
@@ -323,6 +327,7 @@ function validateTableOptions() {
       doesAddVerticalRuleToAll: doesAddVerticalRuleToAll,
       rowsRequiringHline: rowsRequiringHline,
       doesAddHlineToAll: doesAddHlineToAll,
+      doesAlignWidth: doesAlignWidth,
     },
   };
   console.log(tableOptions);
