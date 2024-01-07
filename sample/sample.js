@@ -8,9 +8,11 @@ function onOpen(e) {
 }
 
 /**
- * data input from sidebar is received by this function name.
+ * inputted options from sidebar are received by this function name.
  * this function name is specified in index.html.
- * Must return table string.
+ * @param {string} dataRange
+ * @param {TableOptions} tableOptions
+ * @returns {string} A string formatted as a table
  */
 function tableOptionsHandler(dataRange, tableOptions) {
   return Sheet2TexTable.getTableWithTableOptions(dataRange, tableOptions);
