@@ -3,15 +3,17 @@
  * @returns {GoogleAppsScript.HTML.HtmlOutput} The HTML content for the sidebar.
  */
 function getHtmlForSidebar() {
-  const html = HtmlService.createTemplateFromFile('public/index.html').evaluate();
-  html.setTitle('Sidebar');
+  const html = HtmlService.createTemplateFromFile('public/index.html')
+    .evaluate()
+    .setTitle('TableOptions Settings');
   return html;
 }
 
 function createMenu() {
   SpreadsheetApp.getUi()
     .createMenu('Sheet2TexTable')
-    .addItem('Show sidebar', 'Sheet2TexTable.showSidebar')
+    .addItem('Options Settings', 'Sheet2TexTable.showSidebar')
+    .addItem('Quick convert', 'Sheet2TexTable.quickConvert')
     .addToUi();
 }
 
@@ -21,24 +23,12 @@ function showSidebar() {
 }
 
 /**
- * @param {String} dataRange - A1 notation of data range.
- * @returns {any[][]}
- */
-function getSheetData(dataRange) {
-  const sheet = SpreadsheetApp.getActiveSheet();
-  const range = dataRange ? sheet.getRange(dataRange) : sheet.getDataRange();
-  return range.getValues();
-}
-
-/**
  *
- * @param {GoogleAppsScript.Spreadsheet.Range} dataRange
+ * @param {GoogleAppsScript.Spreadsheet.Range} range
  * @returns {CellFormat[][]}
  */
-function getCellFormats(dataRange) {
+function getCellFormats(range) {
   const cellFormats = [];
-  const sheet = SpreadsheetApp.getActiveSheet();
-  const range = dataRange ? sheet.getRange(dataRange) : sheet.getDataRange();
   const textStyles = range.getTextStyles();
   for (let i = 0; i < textStyles.length; i++) {
     cellFormats[i] = [];
@@ -54,16 +44,53 @@ function getCellFormats(dataRange) {
 
 /**
  *
- * @param {GoogleAppsScript.Spreadsheet.Range} dataRange
+ * @param {String} dataRange
+ * @returns {GoogleAppsScript.Spreadsheet.Range}
+ */
+function getTargetRange(dataRange) {
+  const sheet = SpreadsheetApp.getActiveSheet();
+  return dataRange ? sheet.getRange(dataRange) : sheet.getDataRange();
+}
+
+/**
+ *
+ * @param {String} dataRange
  * @param {TableOptions} tableOptions
  * @returns
  */
 function getTableWithTableOptions(dataRange, tableOptions) {
+  const range = getTargetRange(dataRange);
+  const data = range.getValues();
+  const cellFormats = getCellFormats(range);
+
   tableOptions = Object.assign(defaultTableOptions, tableOptions);
-  const data = getSheetData(dataRange);
-  const cellFormats = getCellFormats(dataRange);
   tableOptions.tabularOptions.cellFormats = cellFormats;
 
-  const table = array2TexTable(data, tableOptions);
-  return table;
+  return array2TexTable(data, tableOptions);
+}
+
+function quickConvert() {
+  const tableOptions = defaultTableOptions;
+  const table = getTableWithTableOptions('', tableOptions);
+  const html = createHtmlOutputForModal(table);
+  showModal(html, 'Quick convert');
+}
+
+/**
+ * @param {String} string
+ * @returns {GoogleAppsScript.HTML.HtmlOutput}
+ */
+function createHtmlOutputForModal(string) {
+  const htmlStr = string.replace(/\n/g, '<br>');
+  const html = HtmlService.createHtmlOutput(htmlStr).setWidth(700).setHeight(500);
+  return html;
+}
+
+/**
+ *
+ * @param {GoogleAppsScript.HTML.HtmlOutput} htmlOutput
+ * @param {String} title
+ */
+function showModal(htmlOutput, title) {
+  SpreadsheetApp.getUi().showModalDialog(htmlOutput, title);
 }
