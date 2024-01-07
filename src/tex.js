@@ -31,10 +31,7 @@
  */
 
 function array2TexTable(array, options) {
-  if (!isMatrix(array)) {
-    if (Array.isArray(array)) array = [array];
-    else array = [[array]];
-  }
+  array = toMatrix(array);
   array = formatEachCellOfMatrix(array, options?.dateFormatOptions);
   array = uniformMatrix(array, options?.matrixOptions?.doesAddingFromEnd);
 

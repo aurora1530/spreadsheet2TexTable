@@ -9,6 +9,20 @@ function isMatrix(value) {
 }
 
 /**
+ * Converts a value to a matrix.
+ * If the value is already a matrix, it returns the value as is.
+ * If the value is an array, it wraps it in a matrix.
+ * If the value is neither a matrix nor an array, it wraps it in a matrix with a single element.
+ * @param {*} value - The value to convert to a matrix.
+ * @returns {Array<Array<*>>} The converted matrix.
+ */
+function toMatrix(value) {
+  if (isMatrix(value)) return value;
+  if (Array.isArray(value)) return [value];
+  return [[value]];
+}
+
+/**
  * Checks if all rows in a 2D array have the same size.
  * Returns false if the argument is not a 2D array.
  * @param {any[][]} matrix - The 2D array to be checked
