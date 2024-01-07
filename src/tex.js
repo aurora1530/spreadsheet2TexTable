@@ -9,32 +9,15 @@
  * @param {any[][]} array - The array to convert
  * @param {TableOptions} options - Optional parameters
  * @returns {string} A string formatted as a table
- *
- * @typedef {Object} TableOptions - Options to format the table.
- * @property {'h' | 't' | 'b' | 'p' | 'H'} [tableLocation] - The location of the table. Options are 'h' (here), 't' (top), 'b' (bottom), 'p' (page), and 'H' (exactly here).
- * @property {string} [caption] - The caption of the table.
- * @property {TabularOptions} [tabularOptions] - Options specific to the tabular environment.
- * @property {MatrixOptions} [matrixOptions] - Options specific to matrix manipulation.
- * @property {DateFormatOptions} [dateFormatOptions] - Options for formatting dates.
- *
- * @typedef {Object} DateFormatOptions
- * @property {string} [timezone] - The timezone to format dates. Default is 'GMT'.
- * @property {string} [format] - The format to format dates. Default is 'yyyy-MM-dd'.
- *
- * @typedef {Object} MatrixOptions
- * @property {boolean} [doesAddingFromEnd] - Specifies whether to add elements to the end (true) or the beginning (false) of each row in a non-uniform 2D array. Defaults to true.
- *
- * @typedef {Object} TabularOptions
- * @property {string} [columnParameters] - Specifies the column parameters. Inappropriate parameters are replaced with 'c'. If there are fewer column parameters than columns, 'c' is added. If there are more column parameters than columns, excess parameters are removed.
- * @property {boolean} [doesAddVerticalRuleToAll] - Specifies whether to add a vertical rule to all columns. If true, '|' of columnParameters is ignored. Defaults to false.
- * @property {Number[]} [rowsRequiringHline] - Specifies the indices of rows that require a horizontal line.if -1 is included,top hline is added. Defaults to [].
- * @property {boolean} [doesAddHlineToAll] - Specifies whether to add a horizontal line to all rows. If true, rowsRequiringHline is ignored. Defaults to false.
- * @property {boolean} [doesAlignWidth] - Specifies whether to align the width of the columns. Defaults to false.
  */
 
 function array2TexTable(array, options) {
   array = toMatrix(array);
-  array = formatEachCellOfMatrix(array, options?.dateFormatOptions);
+  array = formatEachCellOfMatrix(
+    array,
+    options?.dateFormatOptions,
+    options?.tabularOptions?.cellFormats
+  );
   array = uniformMatrix(array, options?.matrixOptions?.doesAddingFromEnd);
   if (options?.tabularOptions?.doesAlignWidth) array = alignWidthOfMatrix(array);
   const numOfColumns = array[0].length;
@@ -144,17 +127,37 @@ function validateColumnParameters(tabularOptions, numOfCol) {
  * Applies escape and date format processing to each cell of a 2D array.
  * @param {any[][]} matrix - The matrix to process
  * @param {DateFormatOptions} dateFormatOptions - Options for date formatting
+ * @param {CellFormat[][]} cellFormats - Specifies the format of each cell.
  * @param {(string|undefined)[][]}
  */
-function formatEachCellOfMatrix(matrix, dateFormatOptions) {
-  return matrix.map((row) =>
-    row.map((cell) => {
-      if (typeof cell === 'string') return escapeTexChar(cell.toString());
-      if (isDate(cell)) {
-        return formatDate(cell, dateFormatOptions?.timezone, dateFormatOptions?.format);
+function formatEachCellOfMatrix(matrix, dateFormatOptions, cellFormats) {
+  return matrix.map((row, i) =>
+    row.map((cell, j) => {
+      if (typeof cell === 'string') {
+        cell = escapeTexChar(cell.toString());
+      } else if (isDate(cell)) {
+        cell = formatDate(cell, dateFormatOptions?.timezone, dateFormatOptions?.format);
+      } else if (typeof cell === 'number') {
+        cell = cell.toString();
+      } else {
+        cell = String(cell);
       }
-      if (typeof cell === 'number') return cell.toString();
-      return String(cell);
+      if (cellFormats?.[i]?.[j]) {
+        cell = applyCellFormat(cell, cellFormats[i][j]);
+      }
+      return cell;
     })
   );
+}
+
+/**
+ *
+ * @param {String} cell
+ * @param {CellFormat} cellFormat
+ * @returns {String}
+ */
+function applyCellFormat(cell, cellFormat) {
+  if (cellFormat?.isBold) cell = `\\textbf{${cell}}`;
+  if (cellFormat?.isItalic) cell = `\\textit{${cell}}`;
+  return cell;
 }
