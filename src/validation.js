@@ -1,3 +1,5 @@
+//@ts-check
+
 /**
  * @typedef {Object} TableOptions - Options to format the table.
  * @property {'h' | 't' | 'b' | 'p' | 'H'} [tableLocation] - The location of the table. Options are 'h' (here), 't' (top), 'b' (bottom), 'p' (page), and 'H' (exactly here).

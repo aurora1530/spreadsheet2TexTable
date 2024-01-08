@@ -1,3 +1,5 @@
+//@ts-check
+
 /**
  * Determines if the argument is a 2D array.
  * @param {any} value - The value to be checked

@@ -1,3 +1,5 @@
+//@ts-check
+
 /**
  * Use this as, for some reason, instanceof Date does not work correctly in the library ahead.
  * @param {any} value
@@ -14,7 +16,7 @@ function isDate(value) {
  * @param {Date} date - The date to format
  * @param {String} [timezone="GMT"] - The timezone
  * @param {String} [format="yyyy-MM-dd"] - The format
- * @returns {String} - The formatted date string
+ * @returns {String | undefined} - The formatted date string
  */
 function formatDate(date, timezone = 'GMT', format = 'yyyy-MM-dd') {
   if (!isDate(date)) return undefined;
