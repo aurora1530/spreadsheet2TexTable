@@ -1,5 +1,8 @@
+//@ts-check
+
 /**
  * @see {@link ./array.js}
+ * @see {@link ./utils.js}
  */
 
 /**
@@ -34,7 +37,7 @@ function array2TexTable(array, options) {
 /**
  *
  * @param {any[][]} array
- * @param {TabularOptions} param1
+ * @param {TabularOptions} tabularOptions
  * @returns {string}
  */
 function createTabularBody(array, tabularOptions) {
@@ -42,16 +45,13 @@ function createTabularBody(array, tabularOptions) {
   const rowsRequiringHline = tabularOptions?.rowsRequiringHline ?? [];
   const topHline =
     doesAddHlineToAll || rowsRequiringHline.includes(-1) ? '\\hline\n' : '';
-  return (
-    topHline +
-    array
-      .map((row, i) => {
-        const hline =
-          doesAddHlineToAll || rowsRequiringHline.includes(i) ? '\\hline' : '';
-        return `${row.join(' & ')} \\\\ ${hline}`;
-      })
-      .join('\n')
-  );
+  const body = array
+    .map((row, i) => {
+      const hline = doesAddHlineToAll || rowsRequiringHline.includes(i) ? '\\hline' : '';
+      return `${row.join(' & ')} \\\\ ${hline}`;
+    })
+    .join('\n');
+  return topHline + body;
 }
 
 /**
@@ -133,18 +133,13 @@ function validateColumnParameters(tabularOptions, numOfCol) {
 function formatEachCellOfMatrix(matrix, dateFormatOptions, cellFormats) {
   return matrix.map((row, i) =>
     row.map((cell, j) => {
-      if (typeof cell === 'string') {
-        cell = escapeTexChar(cell.toString());
-      } else if (isDate(cell)) {
+      if (isDate(cell))
         cell = formatDate(cell, dateFormatOptions?.timezone, dateFormatOptions?.format);
-      } else if (typeof cell === 'number') {
-        cell = cell.toString();
-      } else {
-        cell = String(cell);
-      }
-      if (cellFormats?.[i]?.[j]) {
-        cell = applyCellFormat(cell, cellFormats[i][j]);
-      }
+      else if (['boolean', 'number'].includes(typeof cell)) cell = cell.toString();
+      else cell = String(cell);
+
+      cell = escapeTexChar(cell);
+      if (cellFormats?.[i]?.[j]) cell = applyCellFormat(cell, cellFormats[i][j]);
       return cell;
     })
   );
