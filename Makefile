@@ -18,4 +18,3 @@ newDeploy:
 
 update:push newDeploy
 	@echo "Done!"
-
