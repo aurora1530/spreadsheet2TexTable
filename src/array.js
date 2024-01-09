@@ -40,7 +40,7 @@ function isUniformColumnSize(matrix) {
 /**
  * Uniforms the number of elements in each row of a 2D array to the longest row by adding `undefined`.
  * If the argument is not a 2D array, it returns the argument without throwing an Error.
- * By default, elements are added to the end of each row. If false is passed, it adds elements to the beginning of the row, which is slower due to the use of array.unshift.
+ * By default, elements are added to the end of each row. If false is passed, it adds elements to the beginning of the row, which is slower due to the use of `array.unshift`.
  * @param {any[][]} matrix - The 2D array to be uniformed
  * @param {boolean} doesAddingFromEnd - Specifies whether to add elements to the end (true) or the beginning (false) of each row. Default is true.
  * @returns {any[][]} - The uniformed 2D array

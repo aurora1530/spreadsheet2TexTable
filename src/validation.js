@@ -2,7 +2,8 @@
 
 /**
  * @typedef {Object} TableOptions - Options to format the table.
- * @property {'h' | 't' | 'b' | 'p' | 'H'} [tableLocation] - The location of the table. Options are 'h' (here), 't' (top), 'b' (bottom), 'p' (page), and 'H' (exactly here).
+ * @typedef {'h' | 't' | 'b' | 'p' | 'H'} tableLocation
+ * @property {tableLocation} [tableLocation] - The location of the table. Options are 'h' (here), 't' (top), 'b' (bottom), 'p' (page), and 'H' (exactly here).
  * @property {string} [caption] - The caption of the table.
  * @property {TabularOptions} [tabularOptions] - Options specific to the tabular environment.
  * @property {MatrixOptions} [matrixOptions] - Options specific to matrix manipulation.
@@ -26,6 +27,10 @@
  * @typedef {Object} CellFormat
  * @property {boolean} [isBold] - Specifies whether to bold the cell. Defaults to false.
  * @property {boolean} [isItalic] - Specifies whether to italicize the cell. Defaults to false.
+ */
+
+/**
+ * @type {TableOptions}
  */
 const defaultTableOptions = {
   tableLocation: 'h',
